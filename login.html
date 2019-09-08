@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+        <title>eMercado - Ingrese a su cuenta</title>
+
+        <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/sign-in/">
+        <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+
+        <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/styles.css" rel="stylesheet">
+        
+  </head>
+
+  <body>
+    <div class="row">
+      <div class="col-3" style="background-color: #D61C6C"></div>
+      <div class="col-sm">
+        <img class="mx-auto d-block" src="img/ceibal.png" alt="logo-ceibal" width="150" height="150">
+        
+        <h1 class= "h2 mb-3 font-weight-bold text-center" style="color: #D61C6C">e-Commerce</h1>
+        <h2 class="h4 mb-3 font-weight-normal text-center">Por favor inicie sesión</h2>   
+        <hr>
+      
+        
+        <form class="form-group">
+          <div class="mx-4 mb-3 row">
+            <label for="inputEmail" class="col-sm-3 col-form-label">Correo electrónico:</label>
+            <input type="email" id="inputEmail" class="form-control col-sm-7" placeholder="Ingrese aquí su correo electrónico" required autofocus>
+          </div>
+
+          <div class="mx-4 mb-3 row">
+            <label for="inputPassword" class="col-sm-3 col-form-label">Contraseña:</label>
+            <input type="password" id="inputPassword" class="form-control col-sm-7" placeholder="Ingrese aquí su contraseña" required>
+          </div>
+         
+          <div class="row">
+          <div class="col-sm-3"></div>
+          <a href="" class="col-sm-7">¿Olvidó su contraseña?</a>
+          </div>
+
+          <div class="checkbox mb-3 row">    
+            <div class="col-sm-3"></div>
+            <div class="col-sm-7">
+              <label>
+                <input type="checkbox" value="remember-me">Recordarme
+              </label>
+            </div>          
+          </div>
+          
+
+          <button class="btn btn-lg btn-primary btn-block" type="button" onclick="login()">Sign in</button>
+          <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>     
+        </form>
+      
+      </div>
+    <div class="col-sm-3" style="background-color: #D61C6C"></div>
+  </div>
+  <script src="js/login.js"></script>
+  </body>
+</html>
