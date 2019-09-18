@@ -73,6 +73,11 @@ footer p {
   top:50%;
   left: 50%;
 }
+
+.dropdown-toggle::after {
+  display:none;
+}
+
 .lds-ring div {
   box-sizing: border-box;
   display: block;
