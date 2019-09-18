@@ -11,4 +11,9 @@ var password = document.getElementById("inputPassword").value;
     alert("Te dejamos entrar igual");
     window.open("index.html","_self");
     }
+
+localStorage.setItem(username)
+document.getElementById("username").innerHTML = localStorage.getItem(username);
+   
 }
+
