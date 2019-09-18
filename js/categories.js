@@ -114,8 +114,8 @@ document.addEventListener("DOMContentLoaded", function(e){
     document.getElementById("rangeFilterCount").addEventListener("click", function(){
         //Obtengo el mínimo y máximo de los intervalos para filtrar por cantidad
         //de productos por categoría.
-        minCount = document.getElementById("rangeFilterCountMin").value;
-        maxCount = document.getElementById("rangeFilterCountMax").value;
+        minCount = document.getElementById("rangeFilterCostMin").value;
+        maxCount = document.getElementById("rangeFilterCostMax").value;
 
         if ((minCount != undefined) && (minCount != "") && (parseInt(minCount)) >= 0){
             minCount = parseInt(minCount);
