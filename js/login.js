@@ -12,8 +12,6 @@ var password = document.getElementById("inputPassword").value;
     window.open("index.html","_self");
     }
 
-localStorage.setItem(username)
-document.getElementById("username").innerHTML = localStorage.getItem(username);
-   
+localStorage.setItem(username);
+  
 }
-
