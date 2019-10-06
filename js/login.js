@@ -12,6 +12,10 @@ var password = document.getElementById("inputPassword").value;
     window.open("index.html","_self");
     }
 
-localStorage.setItem(username);
+localStorage.setItem("userEmail", username);
   
+}
+
+function logout(){
+    localStorage.removeItem("userEmail")
 }
