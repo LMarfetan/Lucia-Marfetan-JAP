@@ -1,14 +1,11 @@
 function showUserName(){
-
-    var mail =  localStorage.getItem(username);
-
+    let htmlContentToAppend = "";
+    
     htmlContentToAppend += `
-        <p>` + mail + `</p>
+        <p>` + localStorage.getItem("inputEmail") + `</p>
         `
     
     document.getElementById("username").innerHTML = htmlContentToAppend;
 }
 
-document.addEventListener("DOMContentLoaded", function(e){
-        showUserName();
-});
+showUserName(); 
