@@ -1,7 +1,7 @@
 const ORDER_ASC_BY_NAME = "AZ";
 const ORDER_DESC_BY_NAME = "ZA";
-const ORDER_ASC_BY_PRICE = "";
-const ORDER_DESC_BY_PRICE = "";
+const ORDER_ASC_BY_PRICE = "123";
+const ORDER_DESC_BY_PRICE = "321";
 var currentSortCriteria = undefined;
 var currentProductsArray = [];
 var minCost = undefined;
@@ -76,7 +76,7 @@ function showProductsList(){
             `
         }
     }
-    document.getElementById("product html").innerHTML = htmlContentToAppend;
+    document.getElementById("product-html").innerHTML = htmlContentToAppend;
 }
 
 function sortAndShowProducts(sortCriteria, productsArray){
