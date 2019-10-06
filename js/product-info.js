@@ -1,6 +1,6 @@
 var product = {};
 
-function firstSlide(array){
+function carousel(array){
     let htmlContentToAppend = "";
     let imageSrc = array[0];
 
@@ -9,22 +9,19 @@ function firstSlide(array){
             <img class="d-block w-100" src="` + imageSrc + `" alt="">
         </div>
         `
-        document.getElementById("firstSlide").innerHTML = htmlContentToAppend;
-}
+        document.getElementById("carousel").innerHTML = htmlContentToAppend;
+        
+        for(let i = 1; i < array.length; i++){
+            let imageSrc = array[i];
+    
+            htmlContentToAppend += `
+            <div class="carousel-item">
+                <img class="d-block w-100" src="` + imageSrc + `" alt="">
+            </div>
+            `
 
-function otherSlides(array){
-    let htmlContentToAppend = "";
-
-    for(let i = 1; i < array.length; i++){
-        let imageSrc = array[i];
-
-        htmlContentToAppend += `
-        <div class="carousel-item">
-            <img class="d-block w-100" src="` + imageSrc + `" alt="">
-        </div>
-        `
-        document.getElementById("otherSlides").innerHTML = htmlContentToAppend;
-    }
+            document.getElementById("carousel").innerHTML = htmlContentToAppend;
+        }  
 }
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
@@ -49,8 +46,7 @@ document.addEventListener("DOMContentLoaded", function(e){
             productCostHTML.innerHTML = product.cost;
             productCurrencyHTML.innerHTML = product.currency;
 
-            firstSlide(product.images);
-            otherSlides(product.images);
+            carousel(product.images);
         }
     });
 });
