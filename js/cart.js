@@ -1,6 +1,8 @@
 var cart = [];
+let productCount = 0;
 let productUnitCost = 0;
 let productCurrency = "";
+let productCost = 0;
 let subtotal = 0;
 let shippingPercentage = 0.15;
 let total = 0;
@@ -11,11 +13,19 @@ let ERROR_MSG = "Ha habido un error :(, verifica qué pasó.";
 
 //Función que se utiliza para actualizar los costos de publicación
 function updateTotalCosts(){
-
+    let totalHTML = document.getElementById("total");
+    let totalCurrencyHTML = document.getElementById("totalCurrency");
+    total = (subtotal*(1+shippingPercentage));
+    totalHTML.innerHTML = total;
+    totalCurrencyHTML = productCurrency;
 }
 
 function updateSubtotal(){
-
+    let subtotalHTML = document.getElementById("subtotal");
+    let subtotalCurrencyHTML = document.getElementById("subtotalCurrency");
+    subtotal = (productCount)*(productUnitCost);
+    subtotalHTML.innerHTML = subtotal;
+    subtotalCurrencyHTML = productCurrency;
 }
 
 function showPaymentTypeNotSelected(){
@@ -29,42 +39,59 @@ function hidePaymentTypeNotSelected(){
 function showArticles(array){
 
     let htmlContentToAppend = "";
+    
+
     for(let i = 0; i < array.length; i++){
         let article = array[i];
+
+        productUnitCost = article.unitCost;
+        productCurrency = article.currency;
         
             htmlContentToAppend += `
 
-                <div class="row">
-                    <div class="col-3 border">
-                        <img src="` + article.src + `" alt="`+ article.name +`" class="img-thumbnail rounded mx-auto d-block">
-                    </div>
-                    <div class="col border">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1">`+ article.name +`</h4>
-                            <p class="text-muted">` + article.unitCost + ` ` + article.currency + `</small>
+                
+                    <div class="col-md-9 border">
+                        <div class="row">
+                            <div class="col">
+                                <img src="` + article.src + `" alt="`+ article.name +`" class="img-thumbnail rounded mx-auto d-block">
+                            </div>
                         </div>
-                        <div class="col-md-2">
-                            <div class="input-group">
-                                <span class="input-group-btn input-group-prepend">
-                                    <button type="button" class="btn btn-dark btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </span>
-                    
-                                <input type="text" name="quant[1]" class="form-control input-number text-center" value="`+ article.count +`" min="1" max="10">
+                        <div class="row mt-1">
+                            <div class="border col-lg-8">
+                                <p class="font-weight-bold">`+ article.name +`</p>
+                            </div>
+                            <div class="border col-lg-4">
+                                <p class="font-weight-bold">` + article.unitCost + `` + article.currency + `</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col border" style="height: 100px"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="input-group">
+                                    <span class="input-group-btn-prepend">
+                                        <button type="button" class="btn btn-primary btn-number" data-type="minus" data-field="quant[1]">
+                                            <img src="img/minus.png" style="width: 20px" alt="minus">
+                                        </button>
+                                    </span>
 
-                                <span class="input-group-btn input-group-append">
-                                    <button type="button" class="btn btn-dark btn-number" data-type="plus" data-field="quant[1]">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </span>
+                                    <input type="number" name="quant[1]" id="productCount" class="form-control input-number text-center" value="`+ article.count +`>
+
+                                    <span class="input-group-btn-append">
+                                        <button type="button" class="btn btn-primary btn-number" data-type="plus" data-field="quant[1]">
+                                            <img src="img/plus.png" style="width: 20px" alt="plus">
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <p class="font-weight-bold">`+ subtotal +``+ article.currency +`</p>
                             </div>
                         </div>
                     </div>
-                </div>
            
             `
-
 
         }
     document.getElementById("cart").innerHTML = htmlContentToAppend;
@@ -77,11 +104,14 @@ function showArticles(array){
         getJSONData(CART_INFO_URL).then(function(resultObj){
             if (resultObj.status === "ok")
             {
-                cart = resultObj.data; 
-
+                cart = resultObj.data;
                 showArticles(cart.articles);
-
-                
             }
+
+            document.getElementById("productCount").addEventListener("change", function(){
+                productCount = this.value;
+                updateSubtotal();
+                updateTotalCosts();
+            });
         });
     });
