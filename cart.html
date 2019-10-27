@@ -59,20 +59,64 @@
         </nav>
     <main class="pb-5">
         <h2 class="text-center p-4">Mi Carrito</h2>
-        <div class="container border mt-5">
+        <div class="container mt-5">
             <div class="row">
               <div id="cart"></div>
             </div>
         </div>
 
         <div class="container mt-5">
-        <span id="subtotal"></span>
+          <div class="row">
+            <div class="col">
+              <h4 class="text-right font-weight-bold" id="subtotal"></h4>
+            </div>
+          </div>
+          <hr>
         <div class="row">
-          
-          <h1 class="text-right font-weight-bold" id="total"></h1><h1 id="totalCurrency"></h1>
+          <div class="col">
+            <h5 class="mb-3">Seleccione tipo de envío:</h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5">
+            <div class="d-block my-3">
+              <div class="custom-control custom-radio">
+                <input id="premiumradio" name="publicationType" type="radio" class="custom-control-input" checked="" required="">
+                <label class="custom-control-label" for="premiumradio">Premium (15%)</label>
+                <br><small>(Tiempo estimado de entrega: 2-5 días)</small>
+              </div>
+              <div class="custom-control custom-radio">
+                <input id="expressradio" name="publicationType" type="radio" class="custom-control-input" required="">
+                <label class="custom-control-label" for="expressradio">Express (7%)</label>
+                <br><small>(Tiempo estimado de entrega: 5-8 días)</small>
+              </div>
+              <div class="custom-control custom-radio">
+                <input id="standardradio" name="publicationType" type="radio" class="custom-control-input" required="">
+                <label class="custom-control-label" for="standardradio">Standard (5%)</label>
+                <br><small>(Tiempo estimado de entrega: 12-15 días)</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-7">
+              <p id="deliveryDateMin"></p>
+              <p id="deliveryDateMax"></p>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col">
+            <h4 class="text-right font-weight-bold" id="total"></h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button class="btn btn-primary float-right"><a data-toggle="modal" href="#contidionsModal" style="color: white;">COMPRAR</a></button>
+          </div>
         </div>
       </div>
-		    
+
+      
+      
     </main>
       
       <div class="modal fade" tabindex="-1" role="dialog" id="contidionsModal">
