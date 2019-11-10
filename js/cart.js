@@ -40,26 +40,43 @@ function updateSubtotal(array){
 }
 
 
-function updateDate(){
+function updateDate(days1, days2){
 
-    var date = new Date();
+    var datemin = new Date(new Date().getTime()+(days1*24*60*60*1000));
+    var datemax = new Date(new Date().getTime()+(days2*24*60*60*1000));
 
     let deliveryDateMinHTML = document.getElementById("deliveryDateMin"); 
     let deliveryDateMaxHTML = document.getElementById("deliveryDateMax");
-        
-    var dd = date.getDate();
-    var mm = date.getMonth();
-    var yyyy = date.getFullYear();
+
+    dd1 = datemin.getDate();
+    mm1 = datemin.getMonth();
+    yy1 = datemin.getFullYear();
+
+    dd2 = datemax.getDate();
+    mm2 = datemax.getMonth();
+    yy2 = datemax.getFullYear();
+
+    deliveryDateMinHTML.innerHTML = dd1+"/"+mm1+"/"+yy1;
+    deliveryDateMaxHTML.innerHTML = dd2+"/"+mm2+"/"+yy2;
+}
+
+function validate(){
+    var x = document.forms["0"]["creditCardNumber"].value;
+    var y = document.forms["0"]["creditCardSecurityCode"].value;
+    var z = document.forms["0"]["dueDate"].value;
+
     
+    if (x.length<16){
+        alert("El número de tarjeta debe tener 16 caracteres");
 
-}
-
-
-function showPaymentTypeNotSelected(){
-
-}
-
-function hidePaymentTypeNotSelected(){
+        return false;
+    }else if (y.length<3){
+        alert("El número de seguridad debe tener 3 caracteres");
+        return false;
+    } else {
+        
+        return true;
+    }
 
 }
 
@@ -76,7 +93,7 @@ function showArticles(array){
         subtotalProduct = productCount*productUnitCost
         
             htmlContentToAppend += `                
-                    <div class="p-3 col-md-11 border">
+                    <div class="p-3 col-md-4 border">
                         <div class="row">
                             <div class="col">
                                 <img src="` + article.src + `" alt="`+ article.name +`" class="img-thumbnail rounded mx-auto d-block">
@@ -119,10 +136,17 @@ function showArticles(array){
             if (resultObj.status === "ok")
             {
                 cart = resultObj.data;
+                // cart.articles.push({
+                //     count: 3,
+                //     currency: "UYU",
+                //     name: "Lavarroas",
+                //     src: "img/tree1.jpg",
+                //     unitCost: 300
+                // })
                 showArticles(cart.articles);
                 updateSubtotal(cart.articles);
                 updateTotalCosts();
-                updateDate();
+                updateDate(daysmin,daysmax);
             }
 
             document.getElementById("productCount").addEventListener("change", function(){
@@ -136,7 +160,7 @@ function showArticles(array){
                 daysmin = 2;
                 daysmax = 5;
                 updateTotalCosts();
-                updateDate();
+                updateDate(daysmin,daysmax);
             });
             
             document.getElementById("expressradio").addEventListener("change", function(){
@@ -144,7 +168,7 @@ function showArticles(array){
                 daysmin = 5;
                 daysmax = 8;
                 updateTotalCosts();
-                updateDate();
+                updateDate(daysmin,daysmax);
             });
         
             document.getElementById("standardradio").addEventListener("change", function(){
