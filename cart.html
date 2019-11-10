@@ -60,9 +60,7 @@
     <main class="pb-5">
         <h2 class="text-center p-4">Mi Carrito</h2>
         <div class="container mt-5">
-            <div class="row">
-              <div id="cart"></div>
-            </div>
+            <div id="cart" class="row"></div>
         </div>
 
         <div class="container mt-5">
@@ -78,28 +76,37 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-5">
+          <div class="col-md-5 border">
             <div class="d-block my-3">
               <div class="custom-control custom-radio">
                 <input id="premiumradio" name="publicationType" type="radio" class="custom-control-input" checked="" required="">
-                <label class="custom-control-label" for="premiumradio">Premium (15%)</label>
+                <label class="custom-control-label" for="premiumradio"><span style="font-weight: bold;">Premium</span> (15%)</label>
                 <br><small>(Tiempo estimado de entrega: 2-5 días)</small>
               </div>
               <div class="custom-control custom-radio">
                 <input id="expressradio" name="publicationType" type="radio" class="custom-control-input" required="">
-                <label class="custom-control-label" for="expressradio">Express (7%)</label>
+                <label class="custom-control-label" for="expressradio"><span style="font-weight: bold;">Express</span> (7%)</label>
                 <br><small>(Tiempo estimado de entrega: 5-8 días)</small>
               </div>
               <div class="custom-control custom-radio">
                 <input id="standardradio" name="publicationType" type="radio" class="custom-control-input" required="">
-                <label class="custom-control-label" for="standardradio">Standard (5%)</label>
+                <label class="custom-control-label" for="standardradio"><span style="font-weight: bold;">Standard</span> (5%)</label>
                 <br><small>(Tiempo estimado de entrega: 12-15 días)</small>
               </div>
             </div>
           </div>
-          <div class="col-md-7">
-              <p id="deliveryDateMin"></p>
-              <p id="deliveryDateMax"></p>
+          <div class="col-md-2 border"></div>
+          <div class="col-md-5 border">
+            <div class="row">
+              <div class="col container d-flex justify-content-center">
+                <img src="img/package.jpg" alt="package" width="30%" length="30%">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col text-center">
+                <p>Su paquete llegara entre: <span id="deliveryDateMin"></span> y <span id="deliveryDateMax"></span></p>
+              </div>
+            </div>
           </div>
         </div>
         <hr>
@@ -129,10 +136,11 @@
               </button>
             </div>
             <div class="modal-body">
+              <form class="needs-validation" onsubmit="return validate()">
               <div class="container">
                   <div class="row">
                     <div class="custom-control custom-radio">
-                      <input id="creditCardPaymentRadio" name="paymentType" type="radio" class="custom-control-input">
+                      <input id="creditCardPaymentRadio" name="paymentType" type="radio" class="custom-control-input form-control">
                       <label class="custom-control-label" for="creditCardPaymentRadio">Tarjeta de crédito</label>
                     </div>
                   </div>
@@ -140,14 +148,14 @@
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="shippingStreet">Número de tarjeta</label>
-                      <input type="text" class="form-control" id="creditCardNumber" placeholder="" value="" >
+                      <input type="number" class="form-control" id="creditCardNumber" placeholder="XXXX-XXXX-XXXX-XXXX" value="" max="9999999999999999">
                       <div class="invalid-feedback">
                         Ingresa un número de tarjeta
                       </div>
                     </div>
                     <div class="col-md-4 mb-3">
                       <label for="shippingStreetNumber">Código de seg.</label>
-                      <input type="number" class="form-control" id="creditCardSecurityCode" placeholder="" value="" >
+                      <input type="number" class="form-control" id="creditCardSecurityCode" placeholder="YYY" value="">
                       <div class="invalid-feedback">
                         Ingresa el código de seguridad
                       </div>
@@ -155,8 +163,8 @@
                   </div>
                   <div class="row">
                       <div class="col-md-6 mb-3">
-                        <label for="dueDate">Vencimiento (MM/AA)</label>
-                        <input type="text" class="form-control" id="dueDate" placeholder="" value="" >
+                        <label for="dueDate">Vencimiento</label>
+                        <input type="text" class="form-control" id="dueDate" placeholder="MM/AA" value="">
                         <div class="invalid-feedback">
                           Ingresa la fecha de vencimiento
                         </div>
@@ -172,16 +180,18 @@
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="bankAccountNumber">Número de cuenta</label>
-                      <input type="text" class="form-control" id="bankAccountNumber" placeholder="" value="" >
+                      <input type="number" class="form-control" id="bankAccountNumber" placeholder="" value="">
                       <div class="invalid-feedback">
                         Ingresa un número de cuenta
                       </div>
                     </div>
-              </div>
+                  </div>
             </div>
             <div class="modal-footer">
+              <input type="submit" class="btn btn-primary" value="Comprar">
               <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
             </div>
+          </form>
           </div>
         </div>
       </div>
@@ -192,5 +202,35 @@
       <script src="js/init.js"></script>
       <script src="js/cart.js"></script>
       <script src="js/plus-minus.js"></script>
+
+      <script>
+          $("#creditCardPaymentRadio").click(function() {
+              $("#creditCardNumber").prop("required", true);
+              $("#creditCardNumber").prop("disabled", false);
+              $("#creditCardSecurityCode").prop("required", true);
+              $("#creditCardSecurityCode").prop("disabled", false);
+              $("#dueDate").prop("required", true);
+              $("#dueDate").prop("disabled", false);
+              $("#bankAccountNumber").prop("required", false);
+              $("#bankAccountNumber").prop("disabled", true);
+          });
+          $("#bankingRadio").click(function() {
+            $("#creditCardNumber").prop("required", false);
+              $("#creditCardNumber").prop("disabled", true);
+              $("#creditCardSecurityCode").prop("required", false);
+              $("#creditCardSecurityCode").prop("disabled", true);
+              $("#dueDate").prop("required", false);
+              $("#dueDate").prop("disabled", true);
+              $("#bankAccountNumber").prop("required", true);
+              $("#bankAccountNumber").prop("disabled", false);
+              $("#bankAccountNumber").focus();
+          });
+
+
+
+          
+      </script>
+
+
     </body>
 </html>
