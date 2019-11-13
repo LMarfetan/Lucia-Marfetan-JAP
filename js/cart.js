@@ -67,11 +67,16 @@ function validate(){
 
     
     if (x.length<16){
+        
         alert("El número de tarjeta debe tener 16 caracteres");
-
+        document.getElementById("creditCardNumber").classList.add('needs-validation');
+        event.preventDefault();
+        event.stopPropagation();
         return false;
     }else if (y.length<3){
         alert("El número de seguridad debe tener 3 caracteres");
+        event.preventDefault();
+        event.stopPropagation();
         return false;
     } else {
         
@@ -93,7 +98,7 @@ function showArticles(array){
         subtotalProduct = productCount*productUnitCost
         
             htmlContentToAppend += `                
-                    <div class="p-3 col-md-4 border">
+                    <div class="p-3 col-md-4 border" style="background-color:#D94D66">
                         <div class="row">
                             <div class="col">
                                 <img src="` + article.src + `" alt="`+ article.name +`" class="img-thumbnail rounded mx-auto d-block">
@@ -114,7 +119,7 @@ function showArticles(array){
                         <div class="row">
                             <div class="col-lg-8">
                                 <div class="input-group">
-                                   <input type="number" id="productCount" class="form-control input-number text-center" value="`+ productCount +`">
+                                   <input type="number" min="0" id="productCount" class="form-control input-number text-center" value="`+ productCount +`">
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -136,13 +141,6 @@ function showArticles(array){
             if (resultObj.status === "ok")
             {
                 cart = resultObj.data;
-                // cart.articles.push({
-                //     count: 3,
-                //     currency: "UYU",
-                //     name: "Lavarroas",
-                //     src: "img/tree1.jpg",
-                //     unitCost: 300
-                // })
                 showArticles(cart.articles);
                 updateSubtotal(cart.articles);
                 updateTotalCosts();
@@ -176,7 +174,11 @@ function showArticles(array){
                 daysmin = 12;
                 daysmax = 15;
                 updateTotalCosts();
-                updateDate();
+                updateDate(daysmin,daysmax);
+            });
+
+            document.getElementById("form").addEventListener("submit", function(){
+                validate();
             });
         });
     });
