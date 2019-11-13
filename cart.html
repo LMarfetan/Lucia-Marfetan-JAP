@@ -59,6 +59,7 @@
         </nav>
     <main class="pb-5">
         <h2 class="text-center p-4">Mi Carrito</h2>
+        <p class="lead text-center"> Encuentre aquí todos sus items en proceso de compra </p>
         <div class="container mt-5">
             <div id="cart" class="row"></div>
         </div>
@@ -76,7 +77,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-5 border">
+          <div class="col-md-5">
             <div class="d-block my-3">
               <div class="custom-control custom-radio">
                 <input id="premiumradio" name="publicationType" type="radio" class="custom-control-input" checked="" required="">
@@ -95,8 +96,8 @@
               </div>
             </div>
           </div>
-          <div class="col-md-2 border"></div>
-          <div class="col-md-5 border">
+          <div class="col-md-2"></div>
+          <div class="col-md-5">
             <div class="row">
               <div class="col container d-flex justify-content-center">
                 <img src="img/package.jpg" alt="package" width="30%" length="30%">
@@ -136,7 +137,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <form class="needs-validation" onsubmit="return validate()">
+              <form class="needs-validation" id="form">
               <div class="container">
                   <div class="row">
                     <div class="custom-control custom-radio">
