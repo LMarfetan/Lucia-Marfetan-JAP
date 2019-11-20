@@ -12,7 +12,7 @@ let total = 0;
 let paymentTypeSelected = false;
 const CREDIT_CARD_PAYMENT = "Tarjeta de crédito";
 const BANKING_PAYMENT = "Transferencia bancaria";
-let ERROR_MSG = "Ha habido un error :(, verifica qué pasó.";
+
 
 //Función que se utiliza para actualizar los costos de publicación
 function updateTotalCosts(){
@@ -64,22 +64,37 @@ function validate(){
     var x = document.forms["0"]["creditCardNumber"].value;
     var y = document.forms["0"]["creditCardSecurityCode"].value;
     var z = document.forms["0"]["dueDate"].value;
-
+    var date = new Date();
     
-    if (x.length<16){
+    if ((x.length<16)||(x.length>16)){
+        txt="El número de tarjeta debe tener 16 caracteres";
+        event.preventDefault();
+        event.stopPropagation();
+        document.getElementById("invalidCreditCard").innerHTML = txt;
+        document.getElementById("creditCardNumber").classList.add('error');    
+        return false;
+
+    }else if ((y.length<3)||(y.length>3)){
+        txt="El código de seguridad debe tener 3 caracteres";
+        event.preventDefault();
+        event.stopPropagation();
+        document.getElementById("invalidSecurityCode").innerHTML = txt;
+        document.getElementById("invalidCreditCard").innerHTML = "";
+        document.getElementById("creditCardSecurityCode").classList.add('error')
+        document.getElementById("creditCardNumber").classList.remove('error');
+        return false;
+
+    }else if (z>date) {
+        txt="Ingrese una fecha válida";
+        event.preventDefault();
+        event.stopPropagation();
+        document.getElementById("invalidDueDate").innerHTML = txt;
         
-        alert("El número de tarjeta debe tener 16 caracteres");
-        document.getElementById("creditCardNumber").classList.add('needs-validation');
-        event.preventDefault();
-        event.stopPropagation();
         return false;
-    }else if (y.length<3){
-        alert("El número de seguridad debe tener 3 caracteres");
-        event.preventDefault();
-        event.stopPropagation();
-        return false;
+
     } else {
-        
+        document.forms["0"].classList.add('was-validated');
+        location.replace("index.html");
         return true;
     }
 
@@ -98,7 +113,8 @@ function showArticles(array){
         subtotalProduct = productCount*productUnitCost
         
             htmlContentToAppend += `                
-                    <div class="p-3 col-md-4 border" style="background-color:#D94D66">
+                    <div class="p-3 col-md-4" style="border-style: solid;
+                    border-width: 4px; border-color:#007BFF">
                         <div class="row">
                             <div class="col">
                                 <img src="` + article.src + `" alt="`+ article.name +`" class="img-thumbnail rounded mx-auto d-block">
