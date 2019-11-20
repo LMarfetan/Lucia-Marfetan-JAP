@@ -78,6 +78,9 @@ footer p {
   display:none;
 }
 
+.error {
+  border-color: red;
+}
 
 .lds-ring div {
   box-sizing: border-box;
