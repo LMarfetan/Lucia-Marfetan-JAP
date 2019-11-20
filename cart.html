@@ -149,26 +149,20 @@
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="shippingStreet">Número de tarjeta</label>
-                      <input type="number" class="form-control" id="creditCardNumber" placeholder="XXXX-XXXX-XXXX-XXXX" value="" max="9999999999999999">
-                      <div class="invalid-feedback">
-                        Ingresa un número de tarjeta
-                      </div>
+                      <input type="number" class="form-control" id="creditCardNumber" placeholder="XXXX-XXXX-XXXX-XXXX" value="" min="0">
+                      <small style="color: red;" id="invalidCreditCard"></small>
                     </div>
                     <div class="col-md-4 mb-3">
                       <label for="shippingStreetNumber">Código de seg.</label>
                       <input type="number" class="form-control" id="creditCardSecurityCode" placeholder="YYY" value="">
-                      <div class="invalid-feedback">
-                        Ingresa el código de seguridad
-                      </div>
+                      <small style="color: red;" id="invalidSecurityCode"></small>
                     </div>
                   </div>
                   <div class="row">
                       <div class="col-md-6 mb-3">
                         <label for="dueDate">Vencimiento</label>
-                        <input type="text" class="form-control" id="dueDate" placeholder="MM/AA" value="">
-                        <div class="invalid-feedback">
-                          Ingresa la fecha de vencimiento
-                        </div>
+                        <input class="form-control" type="month" id="dueDate">
+                        <small style="color: red;" id="invalidDueDate"></small>
                       </div>
                   </div>
                   <div class="row">
