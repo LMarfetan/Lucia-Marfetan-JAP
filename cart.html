@@ -80,19 +80,19 @@
           <div class="col-md-5">
             <div class="d-block my-3">
               <div class="custom-control custom-radio">
-                <input id="premiumradio" name="publicationType" type="radio" class="custom-control-input" checked="" required="">
-                <label class="custom-control-label" for="premiumradio"><span style="font-weight: bold;">Premium</span> (15%)</label>
-                <br><small>(Tiempo estimado de entrega: 2-5 días)</small>
-              </div>
+                  <input id="standardradio" name="publicationType" type="radio" class="custom-control-input" checked="" required="">
+                  <label class="custom-control-label" for="standardradio"><span style="font-weight: bold;">Standard</span> (5%)</label>
+                  <br><small>(Tiempo estimado de entrega: 12-15 días)</small>
+                </div>
               <div class="custom-control custom-radio">
                 <input id="expressradio" name="publicationType" type="radio" class="custom-control-input" required="">
                 <label class="custom-control-label" for="expressradio"><span style="font-weight: bold;">Express</span> (7%)</label>
                 <br><small>(Tiempo estimado de entrega: 5-8 días)</small>
               </div>
               <div class="custom-control custom-radio">
-                <input id="standardradio" name="publicationType" type="radio" class="custom-control-input" required="">
-                <label class="custom-control-label" for="standardradio"><span style="font-weight: bold;">Standard</span> (5%)</label>
-                <br><small>(Tiempo estimado de entrega: 12-15 días)</small>
+                <input id="premiumradio" name="publicationType" type="radio" class="custom-control-input" required="">
+                <label class="custom-control-label" for="premiumradio"><span style="font-weight: bold;">Premium</span> (15%)</label>
+                <br><small>(Tiempo estimado de entrega: 2-5 días)</small>
               </div>
             </div>
           </div>
@@ -141,7 +141,7 @@
               <div class="container">
                   <div class="row">
                     <div class="custom-control custom-radio">
-                      <input id="creditCardPaymentRadio" name="paymentType" type="radio" class="custom-control-input form-control">
+                      <input id="creditCardPaymentRadio" name="paymentType" type="radio" class="custom-control-input form-control" checked="">
                       <label class="custom-control-label" for="creditCardPaymentRadio">Tarjeta de crédito</label>
                     </div>
                   </div>
@@ -161,7 +161,7 @@
                   <div class="row">
                       <div class="col-md-6 mb-3">
                         <label for="dueDate">Vencimiento</label>
-                        <input class="form-control" type="month" id="dueDate">
+                        <input class="form-control" type="month" id="dueDate" required>
                         <small style="color: red;" id="invalidDueDate"></small>
                       </div>
                   </div>
@@ -175,7 +175,7 @@
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="bankAccountNumber">Número de cuenta</label>
-                      <input type="number" class="form-control" id="bankAccountNumber" placeholder="" value="">
+                      <input type="number" class="form-control" id="bankAccountNumber" placeholder="" value="" disabled="" required>
                       <div class="invalid-feedback">
                         Ingresa un número de cuenta
                       </div>
