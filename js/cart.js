@@ -36,7 +36,6 @@ function updateSubtotal(array){
     }
     
     subtotalHTML.innerHTML = "Subtotal: " + subtotal +" "+ productCurrency;
-    
 }
 
 
@@ -64,40 +63,48 @@ function validate(){
     var x = document.forms["0"]["creditCardNumber"].value;
     var y = document.forms["0"]["creditCardSecurityCode"].value;
     var z = document.forms["0"]["dueDate"].value;
+    var yyz = z.substr(0,4);
+    var mmz = z.substr(5,6);
     var date = new Date();
+    var yyd = date.getFullYear();
+    var mmd = date.getMonth();
     
-    if ((x.length<16)||(x.length>16)){
-        txt="El número de tarjeta debe tener 16 caracteres";
-        event.preventDefault();
-        event.stopPropagation();
-        document.getElementById("invalidCreditCard").innerHTML = txt;
-        document.getElementById("creditCardNumber").classList.add('error');    
-        return false;
+    
+    if(document.getElementById('creditCardPaymentRadio').checked) {
+        if ((x.length<16)||(x.length>16)){
+            txt="El número de tarjeta debe tener 16 caracteres";
+            event.preventDefault();
+            event.stopPropagation();
+            document.getElementById("invalidCreditCard").innerHTML = txt;
+            document.getElementById("creditCardNumber").classList.add('error');    
+            return false;
 
-    }else if ((y.length<3)||(y.length>3)){
-        txt="El código de seguridad debe tener 3 caracteres";
-        event.preventDefault();
-        event.stopPropagation();
-        document.getElementById("invalidSecurityCode").innerHTML = txt;
-        document.getElementById("invalidCreditCard").innerHTML = "";
-        document.getElementById("creditCardSecurityCode").classList.add('error')
-        document.getElementById("creditCardNumber").classList.remove('error');
-        return false;
+        }else if ((y.length<3)||(y.length>3)){
+            txt="El código de seguridad debe tener 3 caracteres";
+            event.preventDefault();
+            event.stopPropagation();
+            document.getElementById("invalidSecurityCode").innerHTML = txt;
+            document.getElementById("invalidCreditCard").innerHTML = "";
+            document.getElementById("creditCardSecurityCode").classList.add('error')
+            document.getElementById("creditCardNumber").classList.remove('error');
+            return false;
 
-    }else if (z>date) {
-        txt="Ingrese una fecha válida";
-        event.preventDefault();
-        event.stopPropagation();
-        document.getElementById("invalidDueDate").innerHTML = txt;
-        
-        return false;
+        }else if ((yyz<yyd)||((yyz=yyd)&&(mmz<mmd))){
+            txt="Ingrese una fecha válida";
+            event.preventDefault();
+            event.stopPropagation();
+            document.getElementById("invalidDueDate").innerHTML = txt;
+            document.getElementById("invalidSecurityCode").innerHTML = "";
+            document.getElementById("dueDate").classList.add('error')
+            document.getElementById("creditCardSecurityCode").classList.remove('error');
+            return false;
 
-    } else {
-        document.forms["0"].classList.add('was-validated');
-        location.replace("index.html");
-        return true;
+        } else {
+            document.forms["0"].classList.add('was-validated');
+            window.open("index.html","_self");
+            return true;
+        }
     }
-
 }
 
 function showArticles(array){
@@ -113,8 +120,7 @@ function showArticles(array){
         subtotalProduct = productCount*productUnitCost
         
             htmlContentToAppend += `                
-                    <div class="p-3 col-md-4" style="border-style: solid;
-                    border-width: 4px; border-color:#007BFF">
+                    <div class="p-3 col-md-4 shadow p-3 mb-5 bg-white rounded">
                         <div class="row">
                             <div class="col">
                                 <img src="` + article.src + `" alt="`+ article.name +`" class="img-thumbnail rounded mx-auto d-block">
