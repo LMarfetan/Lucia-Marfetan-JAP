@@ -120,10 +120,10 @@ function showArticles(array){
         subtotalProduct = productCount*productUnitCost
         
             htmlContentToAppend += `                
-                    <div class="p-3 col-md-4 shadow p-3 mb-5 bg-white rounded">
+                    <div class="p-3 col-md-3 shadow p-3 mb-5 bg-white rounded">
                         <div class="row">
                             <div class="col">
-                                <img src="` + article.src + `" alt="`+ article.name +`" class="img-thumbnail rounded mx-auto d-block">
+                                <img src="` + article.src + `" alt="`+ article.name +`" class="img-thumbnail rounded mx-auto d-block"  style=" height:150px;">
                             </div>
                         </div>
                         <div class="row mt-1">
@@ -149,6 +149,7 @@ function showArticles(array){
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-1"></div>
            
             `
         }
@@ -163,6 +164,23 @@ function showArticles(array){
             if (resultObj.status === "ok")
             {
                 cart = resultObj.data;
+
+                 //cart.articles.push({
+                     //count: 1,
+                     //currency: "UYU",
+                     //name: "Lavarropas",
+                     //src: "img/lavarropas.jpg",
+                     //unitCost: 2000,
+                //})
+
+                 //cart.articles.push({
+                    //count: 5,
+                    //currency: "UYU",
+                    //name: "Gorro",
+                    //src: "img/gorro.jpg",
+                    //unitCost: 200,
+                //})
+
                 showArticles(cart.articles);
                 updateSubtotal(cart.articles);
                 updateTotalCosts();
